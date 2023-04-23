@@ -9,7 +9,7 @@
 </head>
 </head>
 <body>
-<h1 align="center">Welcome to Mithun Software Solutions -  GitHub Webhook Demo - updated On April 5t</h1>
+<h1 align="center">GitHub webhook demo</h1>
 <h1 align="center"> Hai my Name is Anil Kumar</h1>
 	<h1 align="center">   </h1>
 <hr>
