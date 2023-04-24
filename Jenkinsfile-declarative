@@ -8,7 +8,7 @@ pipeline
     }
 
     parameters {
-    choice choices: ['development', 'master', 'qa'], description: 'Select the branch name', name: 'Branch Name'
+    choice choices: ['development', 'master', 'qa'], description: 'Select the branch name', name: 'BranchName'
     }
 
     
@@ -22,7 +22,7 @@ pipeline
         stage('Checkout Code'){
             steps{
                 slackNotifications("STARTED")
-                git branch: "${params.Branch Name}", url: 'https://github.com/devops-new1/maven-web-application.git'
+                git branch: "${params.BranchName}", url: 'https://github.com/devops-new1/maven-web-application.git'
             }
         }
 
