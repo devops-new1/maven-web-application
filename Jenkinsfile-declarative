@@ -55,9 +55,7 @@ pipeline
     }
     failure {
         slackNotifications(currentBuild.result)
-    }
-    }
-    }
+    }    }    }
 
 }//pipeline closing
 
