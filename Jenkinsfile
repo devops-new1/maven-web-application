@@ -4,6 +4,7 @@ node
 def mavenHome = tool name: "maven-3.9.0"
 
 try {
+slackNotifications("STARTED")
 stage ('Checkout Code') {
 git branch: 'development', url: 'https://github.com/devops-new1/maven-web-application.git'
 }
