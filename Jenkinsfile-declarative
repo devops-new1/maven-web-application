@@ -6,6 +6,11 @@ pipeline
     tools{
     maven "maven-3.9.0"
     }
+
+    parameters {
+    choice choices: ['development', 'master', 'qa'], description: 'Select the branch name', name: 'Branch Name'
+    }
+
     
     options {
     timestamps()
@@ -17,7 +22,7 @@ pipeline
         stage('Checkout Code'){
             steps{
                 slackNotifications("STARTED")
-                git branch: 'development', url: 'https://github.com/devops-new1/maven-web-application.git'
+                git branch: "${params.Branch Name}", url: 'https://github.com/devops-new1/maven-web-application.git'
             }
         }
 
