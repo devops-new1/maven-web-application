@@ -1,62 +1,63 @@
-pipeline{
+pipeline
+{
 
-agent any
+    agent any
 
-tools{
-    maven "maven-3.9.0"
-}
-
-stages{
-    //Get the code from GitHub
-    stage('Checkout Code'){
-        steps{
-            git branch: 'development', url: 'https://github.com/devops-new1/maven-web-application.git'
+        tools{
+            maven "maven-3.9.0"
         }
-    }
 
-    //Do the build
-    stage('Build'){
-        steps{
-            sh "mvn clean package"
-        }
-    }
-
-    //Execute SonarQube Report
-    stage('SonarQube Report'){
-        steps{
-            sh "mvn sonar:sonar"
-        }
-    }
-
-    //Upload artificats in the Nexus
-    stage('Upload Artifcats into Nexus'){
-        steps{
-            sh "mvn deploy"
-        }
-    }
-
-    //Deploy to Tomcat
-    stage('Deploy to Tomcat Server'){
-        steps{
-            sshagent(['cf00e5bf-20c3-4ebe-a34a-18286d6c626a']) {
-                sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@43.205.233.50:/opt/apache-tomcat-9.0.73/webapps"
+    stages{
+        //Get the code from GitHub
+        stage('Checkout Code'){
+            steps{
+                git branch: 'development', url: 'https://github.com/devops-new1/maven-web-application.git'
             }
         }
+
+        //Do the build
+        stage('Build'){
+            steps{
+                sh "mvn clean package"
+            }
+        }
+
+        //Execute SonarQube Report
+        stage('SonarQube Report'){
+            steps{
+                sh "mvn sonar:sonar"
+            }
+        }
+
+        //Upload artificats in the Nexus
+        stage('Upload Artifcats into Nexus'){
+            steps{
+                sh "mvn deploy"
+            }
+        }
+
+        //Deploy to Tomcat
+        stage('Deploy to Tomcat Server'){
+            steps{
+                sshagent(['cf00e5bf-20c3-4ebe-a34a-18286d6c626a']) {
+                    sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@43.205.233.50:/opt/apache-tomcat-9.0.73/webapps"
+                }
+            }
+        }
+
+    }//stages closing
+
+    post {
+    aborted {
+        slackNotifications(currentBuild.result)
+    success {
+        slackNotifications(currentBuild.result)
     }
-
-}//stages closing
-
-post {
-  aborted {
-    slackNotifications(currentBuild.result)
-  success {
-    slackNotifications(currentBuild.result)
-  }
-  failure {
-    slackNotifications(currentBuild.result)
-  }
-}
-
+    failure {
+        slackNotifications(currentBuild.result)
+    }
+    }
+    }
 
 }//pipeline closing
 
