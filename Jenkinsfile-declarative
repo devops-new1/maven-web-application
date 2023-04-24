@@ -8,7 +8,7 @@ pipeline
     }
 
     parameters {
-    choice choices: ['development', 'master', 'qa'], description: 'Select the branch name', name: 'BranchName'
+    choice choices: ['master',  'development',  'qa'], description: 'Select the branch name', name: 'BranchName'
     }
 
     
