@@ -48,15 +48,15 @@ pipeline
     }//stages closing
 
     post {
-    aborted {
-        slackNotifications(currentBuild.result)
     success {
         slackNotifications(currentBuild.result)
     }
     failure {
         slackNotifications(currentBuild.result)
-    }    }    }
+    }
+    }
 
+   
 }//pipeline closing
 
 
