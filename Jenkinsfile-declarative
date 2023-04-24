@@ -20,7 +20,7 @@ pipeline
             steps{
                 slackNotifications("STARTED")
                 git branch: 'development', url: 'https://github.com/devops-new1/maven-web-application.git'
-            }
+             }
         }
 
         //Do the build
