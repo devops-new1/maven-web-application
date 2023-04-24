@@ -11,9 +11,7 @@ pipeline
     timestamps()
     buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '10', daysToKeepStr: '', numToKeepStr: '10')
     }
-    triggers {
-    }
-
+    
     stages{
         //Get the code from GitHub
         stage('Checkout Code'){
