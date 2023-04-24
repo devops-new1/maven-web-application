@@ -1,1 +1,22 @@
+pipeline{
 
+agnent any
+
+stages{
+    //Get the code from GitHub
+    stage('Checkout Code'){
+        steps{
+            git branch: 'development', url: 'https://github.com/devops-new1/maven-web-application.git'
+        }
+    }
+
+    //Do the build
+    stage('Build'){
+        steps{
+            sh "mvn clean package"
+        }
+    }
+
+
+}//stages closing
+}//pipeline closing
