@@ -9,7 +9,7 @@
 </head>
 </head>
 <body>
-<h1 align="center">we are in the declarative way</h1>
+<h1 align="center">we are in the declarative way_updated file</h1>
 <h1 align="center"> Hai my Name is Anil Kumar</h1>
 	<h1 align="center">   </h1>
 <hr>
