@@ -21,6 +21,26 @@ stages{
         }
     }
 
+    //Execute SonarQube Report
+    stage('SonarQube Report'){
+        steps{
+            sh "mvn sonar:sonar"
+        }
+    }
+
+    //Upload artificats in the Nexus
+    stage('Upload Artifcats into Nexus'){
+        steps{
+            sh "mvn deploy"
+        }
+    }
+
+    //Deploy to Tomcat
+    stage('Deploy to Tomcat Server'){
+        steps{
+            sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@http://43.205.233.50:/opt/apache-tomcat-9.0.73/webapps"
+        }
+    }
 
 }//stages closing
 }//pipeline closing
